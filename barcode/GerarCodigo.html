@@ -6,7 +6,9 @@
         color: '#87CEFA',
         defaults: {
             name: { value: "" }, // Valor padrão para o campo "name"
-            barcodeType: { value: "" } // Valor padrão para o campo "bc" (código de barras)
+            barcodeType: { value: "" }, // Valor padrão para o campo "bc" (código de barras)
+            outputFormat:{value: "" },
+            encoding: {value: "" },
         },
 
         // Define o número de portas de entrada e saída para este tipo de node
@@ -14,7 +16,7 @@
         outputs: 1,
 
         // Define o rótulo que será exibido no editor para este node
-        label: function(){
+        label: function () {
             return this.name; // O label é baseado no valor do campo "name"
         }
     })
@@ -24,18 +26,49 @@
     --"GerarCodigo" -->
 <script type="text/html" data-template-name="GerarCodigo">
     <div>
-        <label for="node-input-name"> Name</label>
+        <label for="node-input-name"><strong>Name:</strong></label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
-    <div>
-        <label for="node-input-test"> test</label>
-        <input type="text" id="node-input-test" placeholder="test">
-    </div>
     <div>   
-        <label for="node-input-barcodeType"><i class="icon-barcode"></i> Barcode Format</label>    
+        <label for="node-input-barcodeType"><i class="icon-barcode"></i> 
+            <strong>Format Code:</strong> </label>    
         <select id="node-input-barcodeType">
-            <option value="code128">CODE128</option>
+            <option value="code128" selected>CODE128</option>
             <option value="code39">CODE39</option>
+            <option value="code11">CODE11</option>
+            <option value="code93">CODE93</option>
+            <option value="ean8">EAN8</option>
+            <option value="ean13">EAN13</option>
+            <option value="std25">STD25</option>
+            <option value="msi">MSI</option>
+            <option value="upc">UPC</option>
+            <option value="datamatrix">DATAMATRIX</option>
+        </select>
+    </div>
+
+
+    <!--troca o format de saida do barcode-->
+    <div>
+        <label for="node-input-outputFormat"><i class="icon-file"></i> 
+            <strong>Output Format:</strong></label>
+        <select id="node-input-outputFormat">
+            <option value="stream">Stream</option>
+            <option value="string">String</option>
+            <option value="buffer" selected>Buffer</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="node-input-encoding"><i class="icon-gear"></i> 
+            <strong>Encoding:</strong></label>
+        <select id="node-input-encoding">
+            <option value="utf8" selected>UTF-8</option>
+            <option value="ascii">ASCII</option>
+            <option value="utf16le">UTF-16LE</option>
+            <option value="base64">Base64</option>
+            <option value="latin1">Latin-1</option>
+            <option value="binary">Binary</option>
+            <option value="hex">Hex</option>
         </select>
     </div>
     
