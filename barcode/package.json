@@ -1,0 +1,13 @@
+{
+    "name": "node-red-gerar-codigo",
+    "version": "1.0.800",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "bitgener": "^1.2.12"
+    },
+    "node-red": {
+        "nodes": {
+            "GerarCodigo": "GerarCodigo.js"
+        }
+    }
+}

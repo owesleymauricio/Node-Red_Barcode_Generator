@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    RED.nodes.registerType('GerarCodigo', {
+
+        // Configuração para o tipo de node
+        category: 'function',
+        color: '#87CEFA',
+        defaults: {
+            name: { value: "" }, // Valor padrão para o campo "name"
+            barcodeType: { value: "" } // Valor padrão para o campo "bc" (código de barras)
+        },
+
+        // Define o número de portas de entrada e saída para este tipo de node
+        inputs: 1,
+        outputs: 1,
+
+        // Define o rótulo que será exibido no editor para este node
+        label: function(){
+            return this.name; // O label é baseado no valor do campo "name"
+        }
+    })
+</script>
+
+<!-- O seguinte script define o modelo HTML para a configuração do nó 
+    --"GerarCodigo" -->
+<script type="text/html" data-template-name="GerarCodigo">
+    <div>
+        <label for="node-input-name"> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div>
+        <label for="node-input-test"> test</label>
+        <input type="text" id="node-input-test" placeholder="test">
+    </div>
+    <div>   
+        <label for="node-input-barcodeType"><i class="icon-barcode"></i> Barcode Format</label>    
+        <select id="node-input-barcodeType">
+            <option value="code128">CODE128</option>
+            <option value="code39">CODE39</option>
+        </select>
+    </div>
+    
+</script>
+<!-- O seguinte script fornece informações de ajuda para o nó "GerarCodigo" -->
+<script type="text/html" data-help-name="GerarCodigo-help">
+    <p>The "GerarCodigo" node allows you to create custom codes. Fill in the fields below
+        to configure the node:</p>
+    <ul>
+        <li><strong>name:</strong> Enter a name to identify the node.</li>
+        <li>
+            <strong>Barcode Format:</strong> Select the desired format
+            for the barcode.
+            <ul>
+                <li><strong>CODE:</strong> Choose a format for the code you want.</li>
+            </ul>
+        </li>
+    </ul>
+    <p>After configuring the node, connect it to other nodes as needed. Be aware that the
+        Specific settings may vary based on your use case.</p>
+</script>
