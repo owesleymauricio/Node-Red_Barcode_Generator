@@ -7,6 +7,8 @@
         defaults: {
             name: { value: "Code Generate" },
             barcodeType: { value: "CODE128" },
+            barHeightFormat: { value: 50 }, // Defina o valor padrão corretamente para a altura
+            barWidthFormat: { value: 1 },  
             outputFormat: { value: "Buffer" },
             encoding: { value: "UTF-8" },
         },
@@ -48,17 +50,17 @@
         </select>
     </div>
     
-   <!--
+   
     <div>
-        <label for="node-input-barHeightFormat"><strong>Height:</strong></label>
+        <label for="node-input-barHeightFormat"><strong>Height:(VALUE IN PIXEL)</strong></label>
         <input type="text" id="node-input-barHeightFormat" placeholder="Height">
     </div>
 
     <div>
-        <label for="node-input-barWidthFormat"> <strong>Width:</strong></label>
+        <label for="node-input-barWidthFormat"> <strong>Width:(VALUE IN PIXEL)</strong></label>
         <input type="text" id="node-input-barWidthFormat" placeholder="Width">
     </div>
--->
+
 
     <!--change the barcode output format-->
     <div>

@@ -9,6 +9,8 @@ module.exports = function (RED) {
     async function generator(
         dt,
         barcodeType,
+        barHeightFormat,
+        barWidthFormat,
         outputFormat,
         encoding,
     ) {
@@ -21,8 +23,8 @@ module.exports = function (RED) {
                 encoding: encoding || 'utf8',
                 crc: false,
                 padding: 25,
-                barWidth: 5,
-                barHeight: 150,
+                barWidth: barWidthFormat || 1,
+                barHeight: barHeightFormat|| 50,
                 original1DSize: true,
                 addQuietZone: true,
                 color: '#000',
@@ -55,9 +57,9 @@ module.exports = function (RED) {
                 // use a default value
                 var barcodeType = config.barcodeType || 'CODE128';
 
-                //Defines the height and width of the generated barcode
-                //var barHeightFormat = msg.barHeightFormat || 150;
-                //var barWidthFormat = msg.barWidthFormat || 5;
+                  //Defines the height and width of the generated barcode
+            var barHeightFormat = config.barHeightFormat || 50;
+            var barWidthFormat = config.barWidthFormat || 1;
 
                 // Get the message output format or use 'buffer'
                 // as default
@@ -71,6 +73,8 @@ module.exports = function (RED) {
                 msg.payload = await generator(
                     msg.payload,
                     barcodeType,
+                    barHeightFormat,
+                    barWidthFormat,
                     outputFormat,
                     encoding
                 );
