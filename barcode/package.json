@@ -1,5 +1,5 @@
 {
-    "name": "node-red-gerar-codigo",
+    "name": "node-red-code-generate",
     "version": "1.0.800",
     "license": "UNLICENSED",
     "dependencies": {
@@ -7,7 +7,7 @@
     },
     "node-red": {
         "nodes": {
-            "GerarCodigo": "GerarCodigo.js"
+            "CodeGenerate": "CodeGenerate.js"
         }
     }
 }

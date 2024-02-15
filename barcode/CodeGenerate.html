@@ -1,0 +1,138 @@
+<script type="text/javascript">
+    RED.nodes.registerType('CodeGenerate', {
+
+        // Configuration for node type
+        category: 'function',
+        color: '#87CEFA',
+        defaults: {
+            name: { value: "Code Generate" },
+            barcodeType: { value: "CODE128" },
+            outputFormat: { value: "Buffer" },
+            encoding: { value: "UTF-8" },
+        },
+
+        // Defines the number of input and output ports for this type of node
+        inputs: 1,
+        outputs: 1,
+
+        // Defines the label that will be displayed in the editor for this node
+        label: function () {
+            return this.name;
+        }
+    })
+</script>
+
+<!-- The following script defines the HTML template for node configuration
+ --"CodeGenerate" -->
+<script type="text/html" data-template-name="CodeGenerate">
+    <div>
+        <label for="node-input-name"><strong>Name:</strong></label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+   
+    <div>   
+        <label for="node-input-barcodeType"><i class="icon-barcode"></i> 
+            <strong>Format Code:</strong> </label>    
+        <select id="node-input-barcodeType">
+            <option value="code128" selected>CODE128</option>
+            <option value="code39">CODE39</option>
+            <option value="code11">CODE11</option>
+            <option value="code93">CODE93</option>
+            <option value="ean8">EAN8</option>
+            <option value="ean13">EAN13</option>
+            <option value="std25">STD25</option>
+            <option value="msi">MSI</option>
+            <option value="upc">UPC</option>
+            <option value="datamatrix">DATAMATRIX</option>
+        </select>
+    </div>
+    
+   <!--
+    <div>
+        <label for="node-input-barHeightFormat"><strong>Height:</strong></label>
+        <input type="text" id="node-input-barHeightFormat" placeholder="Height">
+    </div>
+
+    <div>
+        <label for="node-input-barWidthFormat"> <strong>Width:</strong></label>
+        <input type="text" id="node-input-barWidthFormat" placeholder="Width">
+    </div>
+-->
+
+    <!--change the barcode output format-->
+    <div>
+        <label for="node-input-outputFormat"><i class="icon-file"></i> 
+            <strong>Output Format:</strong></label>
+        <select id="node-input-outputFormat">
+            <option value="stream">Stream</option>
+            <option value="string">String</option>
+            <option value="buffer" selected>Buffer</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="node-input-encoding"><i class="icon-gear"></i> 
+            <strong>Encoding:</strong></label>
+        <select id="node-input-encoding">
+            <option value="utf8" selected>UTF-8</option>
+            <option value="ascii">ASCII</option>
+            <option value="utf16le">UTF-16LE</option>
+            <option value="base64">Base64</option>
+            <option value="latin1">Latin-1</option>
+            <option value="binary">Binary</option>
+            <option value="hex">Hex</option>
+        </select>
+    </div>
+    
+</script>
+
+<!-- The following script provides help information for the "CodeGenerate" node -->
+<script type="text/html" data-help-name="CodeGenerate-help">
+    <p>The "CodeGenerate" node allows you to create custom codes. Fill in the fields below
+        to configure the node:</p>
+
+        <li><strong>Name:</strong> Enter a name to identify the node.</li>
+
+        <li><strong>Height:</strong>You can choose the height of the generated barode.</li>
+
+        <li><strong>Width:</strong> You can choose the width of the generated barode.</li>
+  
+    <p><strong>Format Code:</strong></p>
+    <ul>
+        <li><strong>Codabar:</strong> Each character to encode must be one of 0123456789-$:/.+</li>
+        <li><strong>Code11:</strong> Each character to encode must be one of 0123456789-</li>
+        <li><strong>Code39:</strong> Each character to encode must be one of 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%</li>
+        <li><strong>Code93:</strong> Each character to encode must be one of 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-. $/+%</li>
+        <li><strong>Code128:</strong> Each character to encode must be one of !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</li>
+        <li><strong>EAN8:</strong> Data to encode must contain 7 numerical digits.</li>
+        <li><strong>EAN13:</strong> Data to encode must contain 12 numerical digits.</li>
+        <li><strong>Std25 (Standard 2 of 5):</strong> Data to encode must contain only numerical digits.</li>
+        <li><strong>Int25 (Interleaved 2 of 5):</strong> Data to encode must contain only numerical digits.</li>
+        <li><strong>MSI:</strong> Data to encode must contain only numerical digits.</li>
+        <li><strong>UPC:</strong> Data to encode must contain 11 numerical digits.</li>
+        <li><strong>DataMatrix:</strong> Data to encode has no restrictions.</li>
+    </ul>
+
+    <li>
+        <strong>Output Format:</strong> Select the desired format for the barcode.
+        <ul>
+            <li><strong>stream:</strong> Generated SVG tags as a Readable Stream.</li>
+            <li><strong>string:</strong> Generated SVG tags as a string.</li>
+            <li><strong>buffer:</strong> Generated SVG tags as a Buffer.</li>
+        </ul>
+    </li>
+    
+        <p>After configuring the node, connect it to other nodes as needed. Be aware that the specific settings may vary based on your use case.</p>
+        <p><strong>Encoding:</strong> For stream, buffer and file outputs. Default: utf8</p>
+        <ul>
+            <li><strong>utf8:</strong> Multibyte encoded Unicode characters. Many web pages and other document formats use UTF-8.</li>
+            <li><strong>ascii:</strong> For 7-bit ASCII data only. This encoding is fast and will strip the high bit if set.</li>
+            <li><strong>utf16le:</strong> 2 or 4 bytes, little-endian encoded Unicode characters. Surrogate pairs (U+10000 to U+10FFFF) are supported.</li>
+            <li><strong>ucs2:</strong> Alias of 'utf16le'.</li>
+            <li><strong>base64:</strong> Base64 encoding. When creating a Buffer from a string, this encoding will also correctly accept "URL and Filename Safe Alphabet" as specified in RFC4648, Section 5.</li>
+            <li><strong>latin1:</strong> A way of encoding the Buffer into a one-byte encoded string (as defined by the IANA in RFC1345, page 63, to be the Latin-1 supplement block and C0/C1 control codes).</li>
+            <li><strong>binary:</strong> Alias for 'latin1'.</li>
+            <li><strong>hex:</strong> Encode each byte as two hexadecimal characters.</li>
+        </ul>
+</script>
